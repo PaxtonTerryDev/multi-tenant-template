@@ -38,7 +38,7 @@ const emailRegistrationSchema = z
 
 export type EmailRegistration = z.infer<typeof emailRegistrationSchema>;
 
-export function RegistrationForm({
+export function UserRegistrationForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {

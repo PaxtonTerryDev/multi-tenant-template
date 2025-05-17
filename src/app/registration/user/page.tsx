@@ -1,4 +1,4 @@
-import { RegistrationForm } from "@/components/registration-form";
+import { UserRegistrationForm } from "@/components/user-registration-form";
 import { GalleryVerticalEnd } from "lucide-react";
 
 export default function RegistrationPage() {
@@ -11,7 +11,7 @@ export default function RegistrationPage() {
           </div>
           Acme Inc.
         </a>
-        <RegistrationForm />
+        <UserRegistrationForm />
       </div>
     </div>
   );

@@ -38,16 +38,19 @@ export type Database = {
         Row: {
           created_at: string
           id: string
+          name: string
           subdomain: string
         }
         Insert: {
           created_at?: string
           id?: string
+          name?: string
           subdomain?: string
         }
         Update: {
           created_at?: string
           id?: string
+          name?: string
           subdomain?: string
         }
         Relationships: []

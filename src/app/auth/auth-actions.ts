@@ -1,8 +1,9 @@
 "use server";
 import { createClient } from "@/lib/supabase/server";
-import { EmailRegistration } from "@/components/registration-form";
+import { EmailRegistration } from "@/components/user-registration-form";
 import { EmailLogin } from "@/components/login-form";
-import { errorRedirect, homeRedirect } from "@/lib/domain/actions";
+import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 export async function emailLogin(data: EmailLogin) {
   const supabase = await createClient();
@@ -10,10 +11,11 @@ export async function emailLogin(data: EmailLogin) {
   const { error } = await supabase.auth.signInWithPassword(data);
 
   if (error) {
-    errorRedirect();
+    redirect("/error");
   }
 
-  homeRedirect();
+  revalidatePath("/", "layout");
+  redirect("/");
 }
 
 export async function submitEmailRegistration(data: EmailRegistration) {
@@ -33,18 +35,20 @@ export async function submitEmailRegistration(data: EmailRegistration) {
   }
 
   if (authError) {
-    errorRedirect();
+    redirect("/error");
   }
 
-  homeRedirect();
+  revalidatePath("/", "layout");
+  redirect("/");
 }
 
 export async function logout() {
   const supabase = await createClient();
   let { error } = await supabase.auth.signOut();
   if (error) {
-    errorRedirect();
+    redirect("/error");
   }
 
-  homeRedirect();
+  revalidatePath("/", "layout");
+  redirect("/");
 }
