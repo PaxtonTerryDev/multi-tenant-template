@@ -3,11 +3,13 @@
 import { TenantRegistration } from "@/components/tenant-registration-form";
 import { Tenant } from "@/lib/schemas";
 import { createClient } from "@/lib/supabase/server";
+import { SupabaseClient } from "@supabase/supabase-js";
 
 export async function createTenant(
-  tenantData: TenantRegistration
+  tenantData: TenantRegistration,
+  client?: SupabaseClient
 ): Promise<Tenant> {
-  const supabase = await createClient();
+  const supabase = client ?? (await createClient());
   const { name, subdomain } = tenantData;
   const { data, error } = await supabase
     .from("tenants")

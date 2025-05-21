@@ -36,13 +36,13 @@ const emailRegistrationSchema = z
     path: ["confirmPassword"],
   });
 
-export type EmailRegistration = z.infer<typeof emailRegistrationSchema>;
+export type UserEmailRegistration = z.infer<typeof emailRegistrationSchema>;
 
 export function UserRegistrationForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-  const form = useForm<EmailRegistration>({
+  const form = useForm<UserEmailRegistration>({
     resolver: zodResolver(emailRegistrationSchema),
     defaultValues: {
       email: "",
@@ -51,7 +51,7 @@ export function UserRegistrationForm({
     },
   });
 
-  function onEmailRegistrationSubmit(values: EmailRegistration) {
+  function onEmailRegistrationSubmit(values: UserEmailRegistration) {
     submitEmailRegistration(values);
   }
 
